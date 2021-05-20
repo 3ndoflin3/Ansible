@@ -37,7 +37,7 @@ pipeline{
                 sh 'ssh-copy-id server2'
                 sh 'ssh-copy-id server3'
                 sh 'ssh-copy-id server4'
-                sh 'ansible all -i maquinas -m copy -a "src=README.md dest=/tmp/README.md"'
+                sh 'ansible all -i maquinas -m ansible.builtin.shell -a "nohup java -jar /tmp/calculadora-0.0.1-SNAPSHOT.jar </dev/null >/dev/null 2>&1;exit "'
                 sh 'ansible all -i maquinas -a "java -jar /tmp/calculadora-0.0.1-SNAPSHOT.jar"'
             }
         }
