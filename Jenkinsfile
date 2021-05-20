@@ -32,6 +32,11 @@ pipeline{
             steps {
                 echo "Estoy desplegando "
                 sh 'cp target/calculadora-0.0.1-SNAPSHOT.jar /tmp'
+                sh 'ssh-keygen'
+                sh 'ssh-copy-id server1'
+                sh 'ssh-copy-id server2'
+                sh 'ssh-copy-id server3'
+                sh 'ssh-copy-id server4'
                 sh 'ansible all -i maquinas -m copy -a "src=README.md dest=/tmp/README.md"'
                 sh 'ansible all -i maquinas -a "java -jar /tmp/calculadora-0.0.1-SNAPSHOT.jar"'
             }
